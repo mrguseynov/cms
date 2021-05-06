@@ -13,7 +13,7 @@ class SettingsMigration extends Migration
      */
     public function up()
     {
-        Schema::create('Setting', function (Blueprint $table) {
+        Schema::create('Settings', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();
             $table->string('value');
