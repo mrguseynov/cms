@@ -16,7 +16,7 @@ class Settings
                 return  Arr::pluck(Setting::all()->toArray(), 'value', 'key');
             });
         }
-
+        Cache::flush('settings');//dont forget to remove
         return (is_array($key)) ? Arr::only($settings, $key) : $settings[$key];
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Dash;
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Helpers\Settings;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashUserController extends Controller
 {
@@ -13,7 +15,10 @@ class DashUserController extends Controller
      */
     public function index()
     {
-        echo Request::path();
+        $users = User::paginate(Settings::GetValue('userAdminPerPage'));
+        return view('dash.user.index' , $data = [
+            'users' => $users
+        ]);
     }
 
     /**
@@ -45,7 +50,10 @@ class DashUserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('dash.user.show' , $data = [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -54,9 +62,12 @@ class DashUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+
+        return view('dash.user.edit' , $data = [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -66,9 +77,12 @@ class DashUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+
+        $user->save();
+        return redirect()->back()->withSuccess(__('Post was successfully updated'));
     }
 
     /**

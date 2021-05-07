@@ -193,11 +193,11 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-{{Request::path()}}
+
                 @role('admin')
                     <li class="nav-item menu-open">
 
-                        <a href="" class="nav-link active">
+                        <a href="" class="nav-link ">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                             Dashboard
@@ -207,7 +207,7 @@
 
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{ route('user.index')}}" class="nav-link active">
+                            <a href="{{ route('user.index')}}" class="nav-link @if(Request::url() == route('user.index'))active @endif">
                                 <i class="fas fa-users"></i>
                                 <p>{{__('All Users')}}</p>
                             </a>
@@ -258,8 +258,9 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
           <!-- Content Header (Page header) -->
-
-            @yield('content')
+          <section class="content">
+              @yield('content')
+          </section>
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
