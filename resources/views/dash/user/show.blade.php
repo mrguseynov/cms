@@ -40,7 +40,7 @@
                         <b>Friends</b> <a class="float-right">13,287</a>
                         </li>
                     </ul>
-                    @if (Auth::user()->name == $user->name )
+                    @if (Auth::user()->name == $user->name || auth()->user()->hasRole('admin'))
                         <a href="{{ route('user.edit', $user->id)}}" class="btn btn-primary btn-block"><b>{{ __('Edit') }}</b></a>
                     @endif
 

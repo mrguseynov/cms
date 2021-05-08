@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dash;
 use App\Models\User;
 use App\Helpers\Settings;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class DashUserController extends Controller
 {
@@ -51,6 +53,7 @@ class DashUserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+
         return view('dash.user.show' , $data = [
             'user' => $user
         ]);
@@ -64,9 +67,11 @@ class DashUserController extends Controller
      */
     public function edit(User $user)
     {
+        $roles = Role::all();
 
         return view('dash.user.edit' , $data = [
-            'user' => $user
+            'user' => $user,
+            'roles' => $roles
         ]);
     }
 
@@ -80,9 +85,10 @@ class DashUserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->name = $request->name;
-
+        $user->email = $request->email;
+        $user->password =  Hash::make($request->password);
         $user->save();
-        return redirect()->back()->withSuccess(__('Post was successfully updated'));
+        return redirect()->back()->withSuccess(__('Password was successfully updated'));
     }
 
     /**
