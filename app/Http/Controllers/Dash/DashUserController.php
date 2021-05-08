@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Classes\DashSettings;
 
 class DashUserController extends Controller
 {
@@ -17,11 +18,12 @@ class DashUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DashSettings $settings)
     {
-        $users = User::paginate(Settings::GetValue('userAdminPerPage'));
+        $users = User::paginate($settings->user_per_page);
         return view('dash.user.index' , $data = [
-            'users' => $users
+            'users' => $users,
+            //'user_per_page' => $settings->user_per_page
         ]);
     }
 

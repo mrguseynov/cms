@@ -183,7 +183,7 @@
                 <img src=" {{ asset('dash/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="{{route('user.index')}}/{{Auth::user()->id}}" class="d-block">{{ Auth::user()->name }}</a>
               </div>
             </div>
 
@@ -195,8 +195,16 @@
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 @role('admin')
+                @if(Request::url() == route('user.index') || Request::url() == route('user.create'))
                     <li class="nav-item menu-open">
-                        <a href="" class="nav-link ">
+                @else
+                    <li class="nav-item">
+                @endif
+                        @if(Request::url() == route('user.index') || Request::url() == route('user.create'))
+                            <a href="" class="nav-link active">
+                        @else
+                            <a href="" class="nav-link">
+                        @endif
                             <i class="nav-icon fas fa-user"></i>
                             <p>
                             {{__('Dashboard')}}
@@ -206,13 +214,13 @@
 
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{ route('user.index')}}" class="nav-link @if(Request::url() == route('user.index'))active @endif">
+                            <a href="{{ route('user.index')}}" class="nav-link @if(Request::url() == route('user.index')) active @endif">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>{{__('All Users')}}</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{ route('user.create')}}" class="nav-link @if(Request::url() == route('user.create'))active @endif">
+                            <a href="{{ route('user.create')}}" class="nav-link @if(Request::url() == route('user.create')) active @endif">
                                 <i class="fa fa-plus nav-icon" aria-hidden="true"></i>
 
                                 <p>{{__('Add Users')}}</p>
@@ -239,14 +247,28 @@
                 </li>
 
                 <li class="nav-header">EXAMPLES</li>
-
+                @role('admin')
                 <li class="nav-item">
-                  <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-                    <i class="nav-icon fas fa-file"></i>
-                    <p>Documentation</p>
-                  </a>
-                </li>
+                    <a href="" class="nav-link ">
+                        <i class="nav-icon fa fa-cog""></i>
+                        <p>
+                        {{__('Settings')}}
+                        <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                        {{--
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                        <a href="{{ route('settingAdmin')}}" class="nav-link @if(Request::url() == route('settingAdmin'))active @endif">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>{{__('General')}}</p>
+                        </a>
+                        </li>
 
+                    </ul>
+                    --}}
+                </li>
+                @endrole
 
               </ul>
             </nav>

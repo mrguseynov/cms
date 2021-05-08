@@ -27,8 +27,8 @@
     @endif
 </div>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
+    <div class="row justify-center">
+        <div class="col-lg-6">
             <div class="card card-primary">
                 <form action="{{ route('user.store') }}" method="POST">
                     @csrf

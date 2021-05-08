@@ -46,7 +46,7 @@
                                 @enderror
                             </div>
                         </div>
-                            {{--
+
                         <div class="form-group row justify-content-center">
                             <div class="col-md-10 offset-md-10">
                                 <div class="form-check">
@@ -57,7 +57,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>--}}
+                        </div>
 
                         <div class="form-group row mb-0 justify-content-center">
                             <div class="col-md-10">
