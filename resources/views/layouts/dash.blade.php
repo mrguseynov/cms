@@ -159,6 +159,11 @@
               </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="" id="night-mode" role="button">
+                  <i class=" fa-moon"></i>
+                </a>
+              </li>
+            <li class="nav-item">
               <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                 <i class="fas fa-th-large"></i>
               </a>
@@ -192,7 +197,7 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-compact" data-widget="treeview" role="menu" data-accordion="false">
 
                 @role('admin')
                 @if(Request::url() == route('user.index') || Request::url() == route('user.create'))
@@ -243,7 +248,7 @@
                       Widgets
                       <span class="right badge badge-danger">New</span>
                     </p>
-                  </a>s
+                  </a>
                 </li>
 
                 <li class="nav-header">EXAMPLES</li>
@@ -329,6 +334,7 @@
 <script src="{{ asset('dash/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dash/dist/js/demo.js') }}"></script>
+<script src="{{ asset('dash/dist/js/core.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dash/dist/js/pages/dashboard.js') }}"></script>
 </body>
