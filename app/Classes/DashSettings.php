@@ -6,6 +6,7 @@ class DashSettings extends Settings
 {
     public string $site_name;
     public int $user_per_page;
+    public int $setting_per_page;
 
     public static function group(): string
     {

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dash\DashHomeController;
 use App\Http\Controllers\Dash\DashUserController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['role:admin|editor'])->prefix('root')->group( function () {
     Route::get('/', [DashHomeController::class, 'index'])->name('homeAdmin');
     Route::resource('user', DashUserController::class);
+    Route::resource('settings', SettingController::class);
     //Route::resource('category', CategoryController::class);
     //Route::resource('post', PostController::class);
 });

@@ -5,34 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{__('Dashboard')}} | @yield('title')</title>
 
-  <!-- Google Font: Source Sans Pro -->
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
+
   <link rel="stylesheet" href="{{ asset('dash/plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- Ionicons -->
+
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
+
   <link rel="stylesheet" href="{{ asset('dash/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
-  <!-- iCheck -->
+
   <link rel="stylesheet" href="{{ asset('dash/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-  <!-- JQVMap -->
+
   <link rel="stylesheet" href="{{ asset('dash/plugins/jqvmap/jqvmap.min.css') }}">
-  <!-- Theme style -->
+
   <link rel="stylesheet" href="{{ asset('dash/dist/css/adminlte.min.css') }}">
-  <!-- overlayScrollbars -->
+
   <link rel="stylesheet" href="{{ asset('dash/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-  <!-- Daterange picker -->
+
   <link rel="stylesheet" href="{{ asset('dash/plugins/daterangepicker/daterangepicker.css') }}">
-  <!-- summernote -->
+
+  <link rel="stylesheet" href="{{ asset('dash/plugins/toastr/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dash/plugins/summernote/summernote-bs4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dash/custom.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
+       {{-- <div class="preloader flex-column justify-content-center align-items-center">
           <img class="animation__shake" src=" {{ asset('dash/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
-        </div>
+        </div>--}}
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -212,7 +214,7 @@
                         @endif
                             <i class="nav-icon fas fa-user"></i>
                             <p>
-                            {{__('Dashboard')}}
+                            {{__('Users')}}
                             <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -231,12 +233,7 @@
                                 <p>{{__('Add Users')}}</p>
                             </a>
                             </li>
-                            <li class="nav-item">
-                            <a href="./index3.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v3</p>
-                            </a>
-                            </li>
+
                         </ul>
 
                     </li>
@@ -253,25 +250,33 @@
 
                 <li class="nav-header">EXAMPLES</li>
                 @role('admin')
-                <li class="nav-item">
-                    <a href="" class="nav-link ">
-                        <i class="nav-icon fa fa-cog""></i>
+                @if(Request::url() == route('settings.index') || Request::url() == route('settings.create'))
+                    <li class="nav-item menu-open">
+                @else
+                    <li class="nav-item">
+                @endif
+                        @if(Request::url() == route('settings.index') || Request::url() == route('settings.create'))
+                            <a href="" class="nav-link active">
+                        @else
+                            <a href="" class="nav-link">
+                        @endif
+                        <i class="nav-icon fa fa-cog"></i>
                         <p>
                         {{__('Settings')}}
                         <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                        {{--
+
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                        <a href="{{ route('settingAdmin')}}" class="nav-link @if(Request::url() == route('settingAdmin'))active @endif">
+                        <a href="{{ route('settings.index')}}" class="nav-link @if(Request::url() == route('settings.index'))active @endif">
                             <i class="nav-icon fas fa-users"></i>
                             <p>{{__('General')}}</p>
                         </a>
                         </li>
 
                     </ul>
-                    --}}
+
                 </li>
                 @endrole
 
@@ -333,9 +338,13 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dash/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dash/dist/js/demo.js') }}"></script>
+>
 <script src="{{ asset('dash/dist/js/core.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('dash/dist/js/pages/dashboard.js') }}"></script>
+
+<script src="{{ asset('dash/plugins/toastr/toastr.min.js') }}"></script>
+
+<script src="{{ asset('js/app.js') }}" defer></script>
+
 </body>
 </html>
